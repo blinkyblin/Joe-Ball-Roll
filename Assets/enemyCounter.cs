@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class enemyCounter : MonoBehaviour
 {
     // Use this for initialization
     public int enemiesLeft = 0;
     [SerializeField] public List<enemy_move> enemiesAlive;
+    [SerializeField] private TextMeshProUGUI enemiesleft;
     bool killedAllEnemies = false;
     void Start()
     {
@@ -31,18 +35,24 @@ public class enemyCounter : MonoBehaviour
 
     void endGame()
     {
-        killedAllEnemies = true;
+
+        if (enemiesLeft <= 0)
+        {
+            killedAllEnemies = true;
+            // trigger victory
+        }
     }
+
 
     void OnGUI()
     {
         if (killedAllEnemies)
         {
-            GUI.Label(new Rect(0, 0, 200, 20), "all gone");
+            SceneManager.LoadScene(sceneName: "win");
         }
         else
         {
-            GUI.Label(new Rect(0, 0, 200, 20), "Enemies Remaining : " + enemiesLeft);
+            GUI.Label(new Rect(0, 0, 300, 20), "Enemies Remaining: " + enemiesLeft);
         }
     }
 

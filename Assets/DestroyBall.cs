@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DestroyBall : MonoBehaviour
 {
@@ -20,10 +21,17 @@ public class DestroyBall : MonoBehaviour
                 Debug.Log("an enemy has perished");
 
                 enemyCounter.enemiesLeft--;
-            }
 
+            }
+            if (tag == "Player")
+            {
+                Debug.Log("you died");
+                SceneManager.LoadScene(sceneName: "lose");
+            }
+            
             Destroy(gameObject);
 
+           
             // int indexNumber = 0;
             // foreach (enemy_move enemy_Move in enemyCounter.enemiesAlive) 
             //{
